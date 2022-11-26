@@ -1,16 +1,20 @@
-// 練習問題「心臓の鼓動のように大きくなったり小さくなったりする円」
-let count;
-let cycle;
+//「→」と「↑」を押すと大きくなって、「←」と「↓」を押すと小さくなる円
+let x, y, z;
 
 function setup(){
-  createCanvas(200, 200);
-  count = 0;
-  cycle = 100;
+  createCanvas(windowWidth, windowHeight);
+  x = width / 2;
+  y = height / 2;
+  z =10
 }
 
 function draw(){
   background(160, 192, 255);
-  count = (count + 1) % cycle;
-  // BLANK[1]
-  ellipse(width / 2, height / 2, size);
+  ellipse(x, y, z);
+  // キーの処理（else ifにすると同時押しできなくなってしまうので要注意）
+  if(keyIsDown(LEFT_ARROW)){ z -= 10; }//左キーを押すと半径マイナス
+  if(keyIsDown(RIGHT_ARROW)){ z += 10; }//右キーを押すと半径プラス
+  if(keyIsDown(UP_ARROW)){ z += 10; }//上キーを押すと半径プラス
+  if(keyIsDown(DOWN_ARROW)){ z -= 10; }//下キーを押すと半径マイナス
+  z = constrain(z, 10, height);
 }
